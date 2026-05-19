@@ -1,6 +1,4 @@
-const Anthropic = require("@anthropic-ai/sdk");
-
-const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+const axios = require("axios");
 
 const analyzeComplaint = async (req, res, next) => {
   try {
@@ -26,13 +24,24 @@ Return exactly this JSON structure:
 
 Base urgency on: health/safety risk (Critical), infrastructure damage (High), service disruption (Medium), general inconvenience (Low).`;
 
-    const message = await client.messages.create({
-      model: "claude-sonnet-4-20250514",
-      max_tokens: 600,
-      messages: [{ role: "user", content: prompt }],
-    });
+    const response = await axios.post(
+      "https://openrouter.ai/api/v1/chat/completions",
+      {
+        model: "anthropic/claude-3-haiku",
+        messages: [{ role: "user", content: prompt }],
+        max_tokens: 600,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
+          "Content-Type": "application/json",
+          "HTTP-Referer": process.env.APP_URL || "http://localhost:5000",
+          "X-Title": "CivicDesk",
+        },
+      }
+    );
 
-    const raw = message.content[0].text.trim();
+    const raw = response.data.choices[0].message.content.trim();
     let analysis;
     try {
       analysis = JSON.parse(raw);
@@ -41,7 +50,8 @@ Base urgency on: health/safety risk (Critical), infrastructure damage (High), se
       analysis = match ? JSON.parse(match[0]) : null;
     }
 
-    if (!analysis) return res.status(500).json({ success: false, message: "Failed to parse AI response." });
+    if (!analysis)
+      return res.status(500).json({ success: false, message: "Failed to parse AI response." });
 
     res.json({ success: true, data: { ...analysis, analyzedAt: new Date() } });
   } catch (err) {
