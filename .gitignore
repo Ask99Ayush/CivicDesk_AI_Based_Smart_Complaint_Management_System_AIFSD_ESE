@@ -1,0 +1,47 @@
+# dependencies
+node_modules/
+
+# env files
+.env
+
+# logs
+logs
+*.log
+
+# build files
+dist/
+build/
+
+# cache
+.cache/
+coverage/
+
+# react vite
+.vite/
+vite.svg
+
+# editor files
+.vscode/
+.idea/
+
+# os files
+.DS_Store
+Thumbs.db
+
+# uploads
+uploads/
+temp/
+
+# mongodb
+mongodb-data/
+
+# deployment
+.render/
+.vercel/
+
+# secret keys
+*.key
+
+# misc
+*.tmp
+*.bak
