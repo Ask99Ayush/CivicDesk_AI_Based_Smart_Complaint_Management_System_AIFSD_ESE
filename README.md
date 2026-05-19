@@ -18,7 +18,6 @@ A modern MERN Stack application for smart public complaint management with AI-po
 - [Installation](#installation)
 - [Deployment](#deployment)
 - [Sample Complaint JSON](#sample-complaint-json)
-- [Screenshots](#screenshots)
 - [Future Enhancements](#future-enhancements)
 
 ---
@@ -209,8 +208,9 @@ NODE_ENV=development
 ## Clone Repository
 
 ```bash
-git clone <your-repo-url>
-cd smart-complaint-system
+git clone https://github.com/Ask99Ayush/CivicDesk_AI_Based_Smart_Complaint_Management_System_AIFSD_ESE.git
+
+cd CivicDesk_AI_Based_Smart_Complaint_Management_System_AIFSD_ESE
 ```
 
 ## Backend Setup
@@ -253,22 +253,6 @@ Deploy frontend on Render Static Site or Vercel.
   "location": "Ghaziabad"
 }
 ```
-
----
-
-# Screenshots
-
-Add the following screenshots in your project documentation:
-
-- Login Page
-- Register Page
-- Dashboard
-- Complaint Form
-- Complaint List
-- AI Analysis Result
-- MongoDB Database
-- Postman API Testing
-- Render Deployment
 
 ---
 
